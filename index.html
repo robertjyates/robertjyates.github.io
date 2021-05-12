@@ -11,9 +11,42 @@
 <body>
 CS229 Machine Learning with Prof. Andrew Ng<br/>
 Title: A Wind Power Forecasting Problem<br/>
-Wind-turbine energy load generation forecasting - Global Energy Forecasting Competition - used R language<br/>
-<a href="KapoorMontazeriYates-WindPowerForecasting.pdf">Paper</a><br/>
-<br/>
+<a href="WindPowerForecasting.pdf">Paper</a><br/>
+<p>
+Project: Wind Turbine Energy Generation Forecasting
+<ul>
+<li>Kaggle project title: Global Energy Forecasting Competition "A wind power forecasting problem: predicting hourly power generation up to 48 hours ahead at 7 wind farms"</li>
+<li>URL: <a href="https://www.kaggle.com/c/GEF2012-wind-forecasting">https://www.kaggle.com/c/GEF2012-wind-forecasting</a></li>
+<li>Programming Language: R</li>
+</ul>
+</p>
+<p>
+Setup:
+<ul>
+<li>Goal predict power at 7 wind farms.</li>
+<li>Inputs: 48 hour look ahead forecast for wind speed, wind direction, and the zonal and meridional wind components at each of the farms</li>
+<li>Outputs: for each of the 7 wind farms, normalized wind power measurements between zero and one.</li>
+<li>Model Identification and Training period: Sept. 1st, 2009 to Sept. 30th, 2010</li>
+<li>Evaluation period: Oct. 1st, 2010 to Dec. 31st, 2010</li>
+<li>In Evaluation period: Repeated 72 hour pattern. First 36 hours: we are given the generated wind power from 0 to 1. Remaining 48 hours: Missing data of generated wind power, to be predicted by our model.
+</li>
+</ul>
+</p>
+<p>
+Evaluation: Initial models
+<ul>
+<li>Use two time series prediction models: ARIMA and locally weighted regression.</li>
+<li>ARIMIA model: trains itself based on the hourly generated power over all of the training set
+<li>Locally Weighted Regression model: gives more regression weight to the training instances that are similar to the 36 hour given data in the prediction intervals. But, this often leads to huge error in the prediction.</li>
+<li>ARIMA model predicts better than Locally Weighted Regression model, even though ARIMA model tries to average out the prediction.</li>
+</ul>
+Evaluation: Improved models
+<ul>
+<li>Improved these models by adding wind speed features that we chose in our feature selection procedure through correlation to the generated power.</li>
+<li>New ARIMAX and Locally Weighted Regression with Wind Speed models which had a quite reasonable performance improvement over ARIMA and Locally Weighted Regression and beat the benchmark method by almost a factor of 2.</li>
+</ul>
+</p>
+
 CS224W Social &amp; Information Network Analysis (now called Machine Learning with Graphs) with Prof. Jure Leskovec<br/>
 Title: Trust and Helpfulness in Amazon Reviews<br/>
 Analysis of Amazon dataset to determine helpfulness of reviewers  - used Python language<br/>
