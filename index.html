@@ -6,24 +6,22 @@
 <meta name="keywords" content="data scientist, machine learning engineer, applied scientist"/>
 <meta name="author" content="Robert J. Yates"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Data Projects</title>
+<title>Selected Work</title>
 </head>
 <body>
-CS229 Machine Learning with Prof. Andrew Ng<br/>
-Title: A Wind Power Forecasting Problem<br/>
+<h2>A Wind Power Forecasting Problem</h2>
 <a href="KapoorMontazeriYates-WindPowerForecasting.pdf">Paper</a><br/>
 <p>
-Project: Wind Turbine Energy Generation Forecasting
+Project
 <ul>
 <li>Kaggle project title: Global Energy Forecasting Competition "A wind power forecasting problem: predicting hourly power generation up to 48 hours ahead at 7 wind farms"</li>
 <li>URL: <a href="https://www.kaggle.com/c/GEF2012-wind-forecasting">https://www.kaggle.com/c/GEF2012-wind-forecasting</a></li>
 <li>Programming Language: R</li>
+<li>Class: Machine Learning with Prof. Andrew Ng</li>
 </ul>
-</p>
-<p>
 Setup:
 <ul>
-<li>Goal predict power at 7 wind farms.</li>
+<li>Goal: predict power at 7 wind farms.</li>
 <li>Inputs: 48 hour look ahead forecast for wind speed, wind direction, and the zonal and meridional wind components at each of the farms</li>
 <li>Outputs: for each of the 7 wind farms, normalized wind power measurements between zero and one.</li>
 <li>Model Identification and Training period: Sept. 1st, 2009 to Sept. 30th, 2010</li>
@@ -31,8 +29,6 @@ Setup:
 <li>In Evaluation period: Repeated 72 hour pattern. First 36 hours: we are given the generated wind power from 0 to 1. Remaining 48 hours: Missing data of generated wind power, to be predicted by our model.
 </li>
 </ul>
-</p>
-<p>
 Evaluation: Initial models
 <ul>
 <li>Use two time series prediction models: ARIMA and locally weighted regression.</li>
@@ -47,15 +43,46 @@ Evaluation: Improved models
 </ul>
 </p>
 
-CS224W Social &amp; Information Network Analysis (now called Machine Learning with Graphs) with Prof. Jure Leskovec<br/>
-Title: Trust and Helpfulness in Amazon Reviews<br/>
-Analysis of Amazon dataset to determine helpfulness of reviewers  - used Python language<br/>
-<a href="ShinzakiStuckmanYates-TrustAndHelpfulness.pdf">Paper</a><br/>
-<br/>
-CS224M Multi-Agent Systems with Prof. Yoav Shoham<br/>
-Title: Increased Frequency of Defectors Using Evolutionary Spatial Modeling of the Snowdrift game<br/>
-Using the spatial model (agents play games only against their neighbors) - Snowdrift game  - when cost is slightly smaller to moderately smaller than the benefit - increased defection / decreased cooperation<br/>
-<a href="Yates-IncreasedFrequency.pdf">Paper</a><br/>
-</body>
-</html>
+<hr>
 
+<h2>Trust and Helpfulness in Amazon Reviews</h2>
+<a href="ShinzakiStuckmanYates-TrustAndHelpfulness.pdf">Paper</a><br/>
+<p>
+Project
+<ul>
+<li>Reference 1: C. Danescu-Niculescu-Mizil, G. Kossinets, J. Kleinberg, and L. Lee, “How opinions are received by online communities: a case study on Amazon.com helpfulness votes,” in Proceedings of the 18th international conference on World wide web, pp. 141–150, ACM, 2009.</li>
+<li>Reference 2: G. Wang, S. Xie, B. Liu, and P. S. Yu, “Review graph based online store review spammer detection,” in Data Mining (ICDM), 2011 IEEE 11th International Conference on, pp. 1242– 1247, IEEE, 2011.</li>
+<li>Programming Language: Python</li>
+<li>Class: Social &amp; Information Network Analysis (now called Machine Learning with Graphs) with Prof. Jure Leskovec</li>
+<li>Data: “Web data: Amazon reviews” dataset available via the course website. The full dataset contains 34,686,770 reviews.
+<li>We focused on a particular dataset referred to as the “Fine Foods” dataset. The “Fine Foods” subset contains 568,454 reviews from 256,059 users.</li>
+<li>Each review has a number of positive ratings and negative ratings called helpfulness votes.</li>
+</ul>
+Setup
+<ul>
+<li>Motivation: Amazon has over 34 million reviews. While many reviews are helpful, there are also fake reviews written to skew product ratings: Book authors may have fake reviews say how great their book is, and manufacturers may write to fake reviews trashing a competitor’s product. Though users can vote a review as either helpful or unhelpful, previous ratings on a product influence how a user votes: If high variance in review star ratings (reviewers disagree), then polarizing reviews (1 or 5 stars) are voted as most helpful. If low variance in review star ratings (reviewers agree), then average reviews (near product mean) are voted as most helpful.[1]</li>
+<li>Problem Statement: How do we tell which reviews are authentic and identify fraudulent reviewers?</li>
+<li>Use graph based algorithm to determine the honesty of users’ reviews and trustworthiness of the user performing the reviews.[2]</li>
+<li>We modify the algorithm for our purposes to use a single store and apply it to the "Fine Foods" Amazon review data. We analyze the user trust ratings computed from the algorithm with the user helpfulness metric in order to classify fraudulent users.</li>
+</ul>
+Using Review Helpfulness Votes To Obtain a Helpfulness Metric for Users
+<ul>
+<li>Motivation: We want to determine the helpfulness rating of a user from all number of positive helpful and negative helpful (unhelpful) votes that all his/her reviews receive. Suppose a user wrote 2 reviews, the first one has 95 positive votes and 5 negative votes, the second has 1 positive votes and 3 negative votes.</li>
+<li>Method 1 of User Helpfulness calculation: sum total of helpful votes only / sum total of both helpful and unhelpful votes. The user’s rating is 96/104 where the range is 0.0 to 1.0.</li>
+<li>Method 2 of User Helpfulness calculation: sum total of helpful votes only - sum total of unhelpful votes only. The user described above now has a helpfulness rating of +88 where the range is negative infinity to positive infinity. </li>
+<li>Using Method 1, users with a small number of total votes achieve perfect helpfulness score. In Method 2, we achieve the desired quality where most users now have ratings close to a mean (zero), and just a few outliers have a large positive or negative score. Method 2 solves the problem of rating users who have few helpfulness votes in their reviews.</li>
+</ul>
+Algorithm To Compute User Trust
+<ul>
+<li>User trust (-1 distrust to +1 trust) Users are trusted if their reviews are honest, users are untrusted if their reviews are dishonest.</li>
+<li>Item reliability (-1 unreliable to +1 reliable) Items are reliable if they have high scores by trusted users, items are unreliable if they have low scores by trusted users.</li>
+<li>Review honesty (-1 dishonest to +1 honest) First compute review agreement: it is high when review agrees with majority trusted opinion. Review agreement is low when it disagrees with majority trusted opinion. Second compute review honesty: Normalize review agreement and take into account item reliability.</li>
+<li>User trust, product reliability and review honesty are computed through iterative updates: Each variable is initially set 1 and updated many times in a loop that interdependently computes their values.</li>
+</ul>
+Conclusion: Relating User Helpfulness (from votes) with User Trust (from our algorithm)
+<ul>
+<li>When just outlier values are considered, there is a strong correlation between user trust (computed from our algorithm) and user helpfulness (calculated from the second method). For example, 87% of users with helpfulness ratings less than -100 have trustworthiness ratings less than -0.9. So our algorithm using pure graph analysis could be helpful in fraudulent user detection.</li>
+<li>Additionally, a bot that rates every product 5 stars out of 5 will fool our algorithm into thinking it is a helpful user. This is due to the skewed ratings in the data where the products, fine foods, are most commonly reviewed as 5 stars and second most commonly reviewed as 4 stars. Textual analysis of review text, such as searching for common spam phrases, would likely improve our results.</li>
+</ul>
+</p>
+</body>
