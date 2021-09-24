@@ -3,10 +3,16 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="description" content="Data science / data mining / machine learning / information retrieval"/>
-<meta name="keywords" content="data scientist, machine learning engineer, applied scientist"/>
+<meta name="keywords" content="data science, data scientist, machine learning engineer, applied scientist"/>
 <meta name="author" content="Robert J. Yates"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Selected Work</title>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
 </head>
 <body>
 <h2>A Wind Power Forecasting Problem</h2>
@@ -85,4 +91,68 @@ Conclusion: Relating User Helpfulness (from votes) with User Trust (from our alg
 <li>Additionally, a bot that rates every product 5 stars out of 5 will fool our algorithm into thinking it is a helpful user. This is due to the skewed ratings in the data where the products, fine foods, are most commonly reviewed as 5 stars and second most commonly reviewed as 4 stars. Textual analysis of review text, such as searching for common spam phrases, would likely improve our results.</li>
 </ul>
 </p>
-</body>
+
+
+<hr>
+<h2>Increased Frequency of Defectors Using Evolutionary Spatial Modeling of the Snowdrift game</h2>
+<a href="Yates-IncreasedFrequency.pdf">Paper</a><br/>
+<p>
+Project
+<ul>
+<li>Review of literature relating to spatial modeling of the snowdrift game.</li>
+<li>Reference 1: Hauert, Christoph; and Doebeli, Michael (2004). “Spatial structure often inhibits the evolution of cooperation in the snowdrift game.” Nature, 428(6983), 643-646.</li>
+<li>Class: Multi Agent Systems with Prof. Yoav Shoham</li>
+</ul>
+Background
+<ul>
+<li>Economists rely on the process of rational decision making, while evolutionary biologists think of natural selection as the decision maker. Evolutionary game theory models the learning of a population of agents instead of individual agents.</li>
+<li>Definition 1: Replicator dynamic of a single population = The agents within a population all play pure strategies, with the only difference between agents being which pure strategy they choose. After every time update, the agents reproduce according to their fitness or total payoff. The frequency of agents playing each pure strategy is analyzed to determine if these frequencies converge to fixed value as time approaches infinity.</li>
+<li>Definition 2: Evolutionarily stable strategy (ESS) = An evolutionarily stable strategy is a mixed strategy that is resistant to invasion by new strategies. A strategy is an ESS if the payoff of just the ESS strategy is higher than the payoff of the ESS strategy and some new invader strategy. If all members of a population are playing an evolutionarily stable strategy (ESS), then another strategy could not successfully invade the population. </li>
+</ul>
+Snowdrift game
+<ul>
+<li>In the Snowdrift game, two agents work to obtain a common benefit (b) at some shared cost (c) to the cooperating agents.</li>
+<li>The game can be explained as follows: Suppose there is snowdrift on the highway late at night. Two drivers on this road are returning to their respective homes and driving in opposite directions. One driver encounters the snowdrift on the north side, the other on the south side. If both drivers shovel out the snow (both cooperate, C), then they both get the benefit of going home (b) minus the split cost of shoveling (c/2). If neither driver shovels the snow (both defect, D), then neither gets to go home so the payoff for each is 0. If only one driver shovels while the other driver does nothing, the driver that shovels (cooperate C) gets the benefit of going home (b) minus the cost of shoveling (c), but the driver that does nothing (defect D) also gets the benefit of going home (b) without the cost.</li>
+<table>
+  <tr>
+    <td></td>
+    <td>C</td> 
+    <td>D</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>b-(c/2)</td> 
+    <td>b-c</td>
+  </tr>
+  <tr>
+    <td>D</td>
+    <td>b</td> 
+    <td>0</td>
+  </tr>
+</table>
+<li>For the standard game, the best response to cooperating is defecting and the best response to defecting is cooperating.</li>
+<li>The evolutionarily stable strategy of this game is for each player to play C (cooperate) with probability (2b−2c)/(2b-c) and each player to play D (defect) with probability c/(2b−c).</li>
+<li>In the snowdrift game, we set the independent variable r = c/(2b-c), which we call the cost-benefit ratio. r also is the frequency of defectors in a population in a well-mixed population of agents. When the cost c is almost as large as the benefit b, then there is a high cost-benefit ratio, r. When the cost c is much smaller than the benefit b, then there is a low cost-benefit ratio, r.
+</li>
+</ul>
+Evolutionary spatial structure model
+<ul>
+<li>Hauert et al. investigate spatial structure in evolutionary snowdrift. [1] They model a population of agents over time in a spatial structure, where individuals in a population are at points in a regular lattice. They let individuals have two strategies, either always cooperate or always defect. Over time, they repeatedly perform synchronous or asynchronous updates of points. When each point is updated, then the point’s occupant and nearby neighbors compete in the snowdrift game. The individual that wins the point for a given update, will have its offspring occupy the site in the next round.</li>
+<li>The results of the spatial model are as follows: When r, the frequency of defectors, is low, the
+spatial model results in a higher frequency of cooperators and a lower frequency of defectors
+than in a well-mixed population without the spatial model. However, when r is medium or
+high, the spatial model results in a higher frequency of defectors and a lower frequency of
+cooperators than in a well-mixed population without the spatial model. What is interesting
+is that prior research has shown that the spatial model promotes cooperation. Remember,
+for a high r = c/(2b−c), the cost is almost large as the benefit. When r is low, the cost is much 
+less than the benefit. When the cost is greater than the benefit, the snowdrift game becomes an instance of the prisoner’s dilemma. Even with a high r, the spatial model should promote cooperation as it does for the prisoner’s dilemma, but it doesn't here for the snowdrift game.</li>
+<li>Hauert et al. [1] set the independent cost-benefit ratio r = c/(2b−c) to determine the frequency of cooperators. There are two thresholds r1 = 0.2, r2 = 0.65. When they set the cost-benefit ratio r < r1, the frequency of cooperations increases to 100% while the defectors vanish. If r > r2, the frequency of cooperations decreases to 0% while the defectors dominate. A smaller N means a higher r1 and a lower r2. This occurs for both synchronous updates and asynchronous updates. </li>
+<li>In the spatial structure, the prisoner’s dilemma game cooperators clump together into a few large clusters. This is due to the fact that in prisoner’s dilemma, the highest payoff for a cooperator agent is when his opponent is also a cooperator. In the snowdrift game cooperators are distanced themselves into a many smaller ”t” like structures. This is due to the fact that in the snowdrift game, the only payoff for a defector agent is when his opponent is a cooperator. Since the defector receives no playoff when he plays another defector, he is strongly incentivized to be near and play to a cooperator. Without loss of generality, the same results apply to neighborhood sizes 3 ≤ N ≤ 8 as well.</li>
+</ul>
+Conclusion
+<ul>
+<li>Spatial structure typically promotes the evolution of cooperation. However in the snowdrift game with cost values slightly to moderately larger than benefit values, the spatial structure typically promotes the evolution of defection. In a real-life situation, the “closer” you are interpersonal-wise to another player, the more likely you are to defect with the costs are slightly less than, but no larger than, the benefits. This makes sense since the optimal strategy is to do the opposite of what you think the other agent will do. (If you think the other agent will cooperate, you will defect. If you think the other agent will defect, you will cooperate.)</li>
+<li>In short, you are better off cooperating when playing the snowdrift game against strangers in a well-mixed population. If you only play people you know well and the cost is almost as large as the benefit, then you are better off defecting.</li>
+</ul>
+</p>
+</body><ul>
